@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QPushButton, QLineEdit, QComboBox
 from PyQt5 import uic
 from pathlib import Path
 
+from src.iu.MensajeD import MensajeD
 from src.modelo.Cliente import Cliente
 from src.estructura_datos.lista_circular_doblemente_enlazada.ListaCircularDoble import ListaCircularDoble
 
@@ -75,16 +76,17 @@ class ClienteW(QMainWindow):
     def accion_cliente(self):
         
         if not self.es_numero(self.dpi_le.text()) or not self.es_numero(self.telefono_le.text()):
+            self.window = MensajeD('Error', 'Datos no validos', 'El DPI y el telefono deben ser \nnumeros')
             return
         
         if self.dpi_le.text() == '' or self.nombres_le.text() == '' or self.apellidos_le.text() == '' or self.genero_cb.currentIndex() == 0 or self.telefono_le.text() == '' or self.direccion_le.text() == '':
-            print('Datos incompletos')
+            self.window = MensajeD('Error', 'Datos incompletos', 'Todos los campos son obligatorios')
             return
         
         if self.opcion == 1:
             self.lista.insertar(Cliente(int(self.dpi_le.text()), self.nombres_le.text(), self.apellidos_le.text(), self.genero_cb.currentText()[0], int(self.telefono_le.text()), self.direccion_le.text()))
             self.limpiar_campos()
-            print('Cliente creado')
+            self.window = MensajeD('Exito', 'Cliente creado', 'El cliente ha sido creado \ncon exito')
         
         elif self.opcion == 2:
             self.cliente_buscado.set_nombres(self.nombres_le.text())
@@ -92,7 +94,7 @@ class ClienteW(QMainWindow):
             self.cliente_buscado.set_genero(self.genero_cb.currentText()[0])
             self.cliente_buscado.set_telefono(int(self.telefono_le.text()))
             self.cliente_buscado.set_direccion(self.direccion_le.text())
-            print('Cliente modificado')
+            self.window = MensajeD('Exito', 'Cliente modificado', 'El cliente ha sido modificado \ncon exito')
             
         elif self.opcion == 3:
             self.lista.eliminar(int(self.dpi_le.text()))
@@ -100,9 +102,8 @@ class ClienteW(QMainWindow):
             self.llenar_combo_box()
             self.buscar_cb.setCurrentIndex(0)
             self.accion_btn.setDisabled(True)
-            print('Cliente eliminado')
+            self.window = MensajeD('Exito', 'Cliente eliminado', 'El cliente ha sido eliminado \ncon exito')
         
-        #print(self.opcion)
    
     def llenar_combo_box(self):
         self.buscar_cb.clear()
@@ -120,7 +121,6 @@ class ClienteW(QMainWindow):
    
     def es_numero(self, dato:str) -> bool:
         if not dato.isdigit():
-            print('Dato no valido')
             return False
         return True
        

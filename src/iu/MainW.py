@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QMainWindow, QFileDialog
 from PyQt5 import uic
 from pathlib import Path
 
+from src.iu.MensajeD import MensajeD
 from src.iu.GraficoW import GraficoW
 from src.iu.ClienteW import ClienteW
 from src.estructura_datos.lista_circular_doblemente_enlazada.ListaCircularDoble import ListaCircularDoble
@@ -35,6 +36,7 @@ class MainW(QMainWindow):
             lc = CargarDatos()
             if opcion == 1:
                 lc.cargar_clientes(filename[0], self.lista)
+                self.window = MensajeD('Exito', 'Clientes importados', 'Los clientes han sido \nimportados con exito')
             elif opcion == 2:
                 lc.cargar_vehiculos(filename[0])
             elif opcion == 3:
