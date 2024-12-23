@@ -1,13 +1,20 @@
 # main.py
 import sys
 from PyQt5.QtWidgets import QApplication
-from src.iu.Entrada import Entrada
+from src.estructura_datos.lista_circular_doblemente_enlazada.ListaCircularDoble import ListaCircularDoble
+from src.iu.MainW import MainW
 
-class Main:
+class main:
     def __init__(self):
+        
+        lista: ListaCircularDoble = ListaCircularDoble()
+        
         app = QApplication(sys.argv)
-        window = Entrada()
-        app.exec_()  
+        window = MainW(lista)
+        app.exec_()
+        #print(lista)
+        
+          
 
 if __name__ == "__main__":
-    Main()
+    main()

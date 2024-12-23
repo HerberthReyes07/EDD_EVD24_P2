@@ -63,6 +63,10 @@ class ListaCircularDoble:
                     self.__cabeza = nuevo
 
     def buscar(self, dpi: int) -> Cliente:
+        
+        if self.__cabeza is None:
+            return None
+        
         recorrer = self.__cabeza
         while True:
             if recorrer.get_cliente().get_dpi() == dpi:
@@ -72,9 +76,19 @@ class ListaCircularDoble:
                 return None
 
     def eliminar(self, dpi: int) -> bool:
+        
+        if self.__cabeza is None:
+            return False
+        
         recorrer = self.__cabeza
         while True:
             if recorrer.get_cliente().get_dpi() == dpi:
+                
+                if recorrer.get_siguiente() == recorrer:
+                    self.__cabeza = None
+                    self.__cola = None
+                    return True
+                
                 recorrer.get_anterior().set_siguiente(recorrer.get_siguiente())
                 recorrer.get_siguiente().set_anterior(recorrer.get_anterior())
 
@@ -91,7 +105,10 @@ class ListaCircularDoble:
             if recorrer == self.__cabeza:
                 return False
 
-    def mostrar_estructura(self) -> str:
+    def graficar(self) -> str:
+        
+        if self.__cabeza is None:
+            return 'Lista vacia'
 
         config: str = (
                         'bgcolor=\"#F5F5F5\";\n'
@@ -117,6 +134,7 @@ class ListaCircularDoble:
                   '[label=\"dpi = ' + recorrer.get_cliente().get_dpi().__str__() 
                 + '\\nNombres = '+ recorrer.get_cliente().get_nombres() 
                 + '\\nApellidos = '+ recorrer.get_cliente().get_apellidos()
+                + '\\nGenero = '+ ("Masculino" if recorrer.get_cliente().get_genero() == 'M' else "Femenino")
                 + '\\nTelefono = '+ recorrer.get_cliente().get_telefono().__str__()
                 + '\"];\n'
             )
@@ -141,7 +159,14 @@ class ListaCircularDoble:
 
         return 'digraph G {\n' + config + '\n' + defNodo + '\n' + relNodo + '\n' + encuadre + '\n}'  
 
+    def esta_vacia(self) -> bool:
+        return self.__cabeza is None
+
     def __str__(self):
+        
+        if self.__cabeza is None:
+            return 'Lista vacia'
+        
         cadena = ''
         recorrer = self.__cabeza
 

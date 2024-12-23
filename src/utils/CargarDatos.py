@@ -6,14 +6,14 @@ from src.modelo.Cliente import Cliente
 
 class CargarDatos:
 
-    def cargar_clientes(self, ruta: str):
+    def cargar_clientes(self, ruta: str, lista: ListaCircularDoble):
 
         archivo = open(ruta, 'r')
         clientes = archivo.read().split(';')
         clientes.pop(-1)
         cont: int = 0
 
-        lista: ListaCircularDoble = ListaCircularDoble()
+        #lista: ListaCircularDoble = ListaCircularDoble()
 
         for cliente_aux in clientes:
             cont += 1
@@ -30,17 +30,7 @@ class CargarDatos:
         
         archivo.close()
 
-        print(lista)
-
-        """ cliente = lista.buscar(1)
-        if cliente is not None:
-            cliente.set_nombres('Herberth') 
-        lista.eliminar(1)
-        lista.eliminar(5)
-        lista.eliminar(3) """
-
-        print("-----------------")
-        print(lista.mostrar_estructura())
+        #print(lista.mostrar_estructura())
 
 
     def cargar_vehiculos(self, ruta: str):

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>60</y>
+      <width>321</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu</family>
+      <pointsize>30</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Llega Rapidito</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuClientes">
+    <property name="title">
+     <string>Clientes</string>
+    </property>
+    <addaction name="action_crear_clt"/>
+    <addaction name="action_modificar_clt"/>
+    <addaction name="action_eliminar_clt"/>
+    <addaction name="action_info_clt"/>
+    <addaction name="action_graficar_clt"/>
+   </widget>
+   <widget class="QMenu" name="menuVeh_culos">
+    <property name="title">
+     <string>Vehículos</string>
+    </property>
+    <addaction name="action_crear_vhcl"/>
+    <addaction name="action_modificar_vhcl"/>
+    <addaction name="action_eliminar_vhcl"/>
+    <addaction name="action_info_vhcl"/>
+    <addaction name="action_graficar_vhcl"/>
+   </widget>
+   <widget class="QMenu" name="menuRutas">
+    <property name="title">
+     <string>Rutas</string>
+    </property>
+    <addaction name="action_graficar_rts"/>
+   </widget>
+   <widget class="QMenu" name="menuViajes">
+    <property name="title">
+     <string>Viajes</string>
+    </property>
+    <addaction name="action_crear_vj"/>
+    <addaction name="action_graficar_vj"/>
+   </widget>
+   <widget class="QMenu" name="menuCargar_Datos">
+    <property name="title">
+     <string>Cargar Datos</string>
+    </property>
+    <addaction name="action_cargar_clientes"/>
+    <addaction name="action_cargar_vehiculos"/>
+    <addaction name="action_cargar_rutas"/>
+   </widget>
+   <addaction name="menuClientes"/>
+   <addaction name="menuVeh_culos"/>
+   <addaction name="menuRutas"/>
+   <addaction name="menuViajes"/>
+   <addaction name="menuCargar_Datos"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_cargar_clientes">
+   <property name="text">
+    <string>Cargar Clientes</string>
+   </property>
+  </action>
+  <action name="action_cargar_vehiculos">
+   <property name="text">
+    <string>Cargar Vehículos</string>
+   </property>
+  </action>
+  <action name="action_cargar_rutas">
+   <property name="text">
+    <string>Cargar Rutas</string>
+   </property>
+  </action>
+  <action name="action_crear_clt">
+   <property name="text">
+    <string>Crear</string>
+   </property>
+  </action>
+  <action name="action_modificar_clt">
+   <property name="text">
+    <string>Modificar</string>
+   </property>
+  </action>
+  <action name="action_eliminar_clt">
+   <property name="text">
+    <string>Eliminar</string>
+   </property>
+  </action>
+  <action name="action_info_clt">
+   <property name="text">
+    <string>Mostrar información</string>
+   </property>
+  </action>
+  <action name="action_graficar_clt">
+   <property name="text">
+    <string>Graficar</string>
+   </property>
+  </action>
+  <action name="action_crear_vhcl">
+   <property name="text">
+    <string>Crear</string>
+   </property>
+  </action>
+  <action name="action_modificar_vhcl">
+   <property name="text">
+    <string>Modificar</string>
+   </property>
+  </action>
+  <action name="action_eliminar_vhcl">
+   <property name="text">
+    <string>Eliminar</string>
+   </property>
+  </action>
+  <action name="action_info_vhcl">
+   <property name="text">
+    <string>Mostrar información</string>
+   </property>
+  </action>
+  <action name="action_graficar_vhcl">
+   <property name="text">
+    <string>Graficar</string>
+   </property>
+  </action>
+  <action name="action_graficar_rts">
+   <property name="text">
+    <string>Graficar</string>
+   </property>
+  </action>
+  <action name="action_crear_vj">
+   <property name="text">
+    <string>Crear</string>
+   </property>
+  </action>
+  <action name="action_graficar_vj">
+   <property name="text">
+    <string>Graficar</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
