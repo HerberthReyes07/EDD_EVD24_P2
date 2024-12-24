@@ -5,7 +5,7 @@ class MensajeD(QtWidgets.QDialog):
     def __init__(self, titulo_ventana: str, titulo: str, mensaje: str):
         super(MensajeD, self).__init__()
         
-        ruta_ui = Path(__file__).parent / 'mensaje.ui'
+        ruta_ui = Path(__file__).parent / '../modelo/mensaje.ui'
         uic.loadUi(ruta_ui, self)
         
         self.setWindowTitle(titulo_ventana)

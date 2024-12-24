@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QPushButton, QLineEdit, QComboBox
 from PyQt5 import uic
 from pathlib import Path
 
-from src.iu.MensajeD import MensajeD
+from src.iu.funcionalidad.MensajeD import MensajeD
 from src.modelo.Cliente import Cliente
 from src.estructura_datos.lista_circular_doblemente_enlazada.ListaCircularDoble import ListaCircularDoble
 
@@ -12,7 +12,7 @@ class ClienteW(QMainWindow):
         super(ClienteW, self).__init__()
         self.lista = lista
         self.opcion = opcion
-        ruta_ui = Path(__file__).parent / 'cliente.ui'
+        ruta_ui = Path(__file__).parent / '../modelo/cliente.ui'
         uic.loadUi(ruta_ui, self)
         
         self.buscar_cb = self.findChild(QComboBox, 'comboBox_buscar')

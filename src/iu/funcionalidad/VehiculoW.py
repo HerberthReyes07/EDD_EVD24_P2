@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QPushButton, QLineEdit, QComboBox
 from PyQt5 import uic
 from pathlib import Path
 
-from src.iu.MensajeD import MensajeD
+from src.iu.funcionalidad.MensajeD import MensajeD
 from src.estructura_datos.arbol_b.ArbolB import ArbolB
 from src.modelo.Vehiculo import Vehiculo
 
@@ -12,7 +12,7 @@ class VehiculoW(QMainWindow):
         super(VehiculoW, self).__init__()
         self.arbolB = arbolB
         self.opcion = opcion
-        ruta_ui = Path(__file__).parent / 'vehiculo.ui'
+        ruta_ui = Path(__file__).parent / '../modelo/vehiculo.ui'
         uic.loadUi(ruta_ui, self)
         
         self.buscar_cb = self.findChild(QComboBox, 'comboBox_buscar')

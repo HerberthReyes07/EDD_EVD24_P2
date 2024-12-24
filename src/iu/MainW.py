@@ -3,11 +3,11 @@ from PyQt5.QtWidgets import QMainWindow, QFileDialog
 from PyQt5 import uic
 from pathlib import Path
 
-from src.iu.VehiculoW import VehiculoW
+from src.iu.funcionalidad.VehiculoW import VehiculoW
 from src.estructura_datos.arbol_b.ArbolB import ArbolB
-from src.iu.MensajeD import MensajeD
-from src.iu.GraficoW import GraficoW
-from src.iu.ClienteW import ClienteW
+from src.iu.funcionalidad.MensajeD import MensajeD
+from src.iu.funcionalidad.GraficoW import GraficoW
+from src.iu.funcionalidad.ClienteW import ClienteW
 from src.estructura_datos.lista_circular_doblemente_enlazada.ListaCircularDoble import ListaCircularDoble
 from src.utils.CargarDatos import CargarDatos
 from src.utils.Graficar import Graficar
@@ -18,7 +18,7 @@ class MainW(QMainWindow):
         self.lista = lista
         self.arbolB = arbolB
         
-        ruta_ui = Path(__file__).parent / 'MainW.ui'
+        ruta_ui = Path(__file__).parent / 'main.ui'
         uic.loadUi(ruta_ui, self)
         
         self.action_crear_clt.triggered.connect(lambda: self.accion_cliente(1))

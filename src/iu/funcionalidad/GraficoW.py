@@ -7,7 +7,7 @@ from pathlib import Path
 class GraficoW(QMainWindow):
     def __init__(self, path_grafico:str, titulo:str):
         super(GraficoW, self).__init__()
-        ruta_ui = Path(__file__).parent / 'grafico.ui'
+        ruta_ui = Path(__file__).parent / '../modelo/grafico.ui'
         uic.loadUi(ruta_ui, self)
         
         self.setWindowTitle(titulo)
