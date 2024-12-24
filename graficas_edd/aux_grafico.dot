@@ -1,0 +1,31 @@
+digraph G {
+	bgcolor="#F5F5F5";
+	fontcolor=black;
+	nodesep=0.5;
+	splines=false;
+	label="Vehículos";
+	labelloc="t";
+	fontsize=25;
+	node [shape=record style=filled fillcolor="#004488" fontcolor="#F5F5F5" color=transparent];
+	edge [fontcolor=white color="#ff5722"];
+	n0 [label="<f0> |I889RS|<f1>"];
+	n0:f0 -> n1;
+	n1 [label="<f0> |C223FG|<f1> |F556LM|<f2>"];
+	n1:f0 -> n2;
+	n2 [label="<f0> |A001BC|<f1> |B112DE|<f2>"];
+	n1:f1 -> n3;
+	n3 [label="<f0> |D334HI|<f1> |E445JK|<f2>"];
+	n1:f2 -> n4;
+	n4 [label="<f0> |G667NO|<f1> |H778PQ|<f2>"];
+	n0:f1 -> n5;
+	n5 [label="<f0> |L222XY|<f1> |O555CD|<f2> |P123AB|<f3>"];
+	n5:f0 -> n6;
+	n6 [label="<f0> |J990TU|<f1> |K111VW|<f2>"];
+	n5:f1 -> n7;
+	n7 [label="<f0> |M333YZ|<f1> |N444AB|<f2>"];
+	n5:f2 -> n8;
+	n8 [label="<f0> |P101JK|<f1> |P112MN|<f2>"];
+	n5:f3 -> n9;
+	n9 [label="<f0> |P456DE|<f1> |P789GH|<f2>"];
+	
+}

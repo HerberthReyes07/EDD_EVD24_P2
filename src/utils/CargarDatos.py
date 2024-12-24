@@ -1,3 +1,4 @@
+from src.estructura_datos.arbol_b.ArbolB import ArbolB
 from src.estructura_datos.lista_circular_doblemente_enlazada.ListaCircularDoble import ListaCircularDoble
 from src.modelo.Ruta import Ruta
 from src.modelo.Vehiculo import Vehiculo
@@ -33,7 +34,7 @@ class CargarDatos:
         #print(lista.mostrar_estructura())
 
 
-    def cargar_vehiculos(self, ruta: str):
+    def cargar_vehiculos(self, ruta: str, arbolB: ArbolB):
         archivo = open(ruta, 'r')
         vehiculos = archivo.read().split(';')
         vehiculos.pop(-1)
@@ -41,7 +42,7 @@ class CargarDatos:
 
         for vehiculo_aux in vehiculos:
             cont += 1
-            print(f'\n------ Vehiculo #{cont} ------')
+            #print(f'\n------ Vehiculo #{cont} ------')
             dato = vehiculo_aux.split(':')
 
             if len(dato) != 4:
@@ -49,7 +50,8 @@ class CargarDatos:
                 continue
 
             vehiculo = Vehiculo(dato[0][:-1].replace("\n", ""), dato[1][1:-1], dato[2][1:-1], float(dato[3][1:]))
-            print(vehiculo)
+            #print(vehiculo)
+            arbolB.insertar_vehiculo(vehiculo)
 
         archivo.close()
 

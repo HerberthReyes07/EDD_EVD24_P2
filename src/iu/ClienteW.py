@@ -86,7 +86,7 @@ class ClienteW(QMainWindow):
         if self.opcion == 1:
             self.lista.insertar(Cliente(int(self.dpi_le.text()), self.nombres_le.text(), self.apellidos_le.text(), self.genero_cb.currentText()[0], int(self.telefono_le.text()), self.direccion_le.text()))
             self.limpiar_campos()
-            self.window = MensajeD('Exito', 'Cliente creado', 'El cliente ha sido creado \ncon exito')
+            self.window = MensajeD('Exito', 'Cliente creado', 'El cliente ha sido creado \ncon éxito')
         
         elif self.opcion == 2:
             self.cliente_buscado.set_nombres(self.nombres_le.text())
@@ -94,7 +94,7 @@ class ClienteW(QMainWindow):
             self.cliente_buscado.set_genero(self.genero_cb.currentText()[0])
             self.cliente_buscado.set_telefono(int(self.telefono_le.text()))
             self.cliente_buscado.set_direccion(self.direccion_le.text())
-            self.window = MensajeD('Exito', 'Cliente modificado', 'El cliente ha sido modificado \ncon exito')
+            self.window = MensajeD('Exito', 'Cliente modificado', 'El cliente ha sido modificado \ncon éxito')
             
         elif self.opcion == 3:
             self.lista.eliminar(int(self.dpi_le.text()))
@@ -102,7 +102,7 @@ class ClienteW(QMainWindow):
             self.llenar_combo_box()
             self.buscar_cb.setCurrentIndex(0)
             self.accion_btn.setDisabled(True)
-            self.window = MensajeD('Exito', 'Cliente eliminado', 'El cliente ha sido eliminado \ncon exito')
+            self.window = MensajeD('Exito', 'Cliente eliminado', 'El cliente ha sido eliminado \ncon éxito')
         
    
     def llenar_combo_box(self):
