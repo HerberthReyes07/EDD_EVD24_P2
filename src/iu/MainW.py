@@ -1,8 +1,9 @@
 import subprocess
-from PyQt5.QtWidgets import QMainWindow, QFileDialog
+from PyQt5.QtWidgets import QMainWindow, QFileDialog, QMenuBar, QPushButton
 from PyQt5 import uic
 from pathlib import Path
 
+from src.estructura_datos.grafo.ListaAdyacencia import ListaAdyacencia
 from src.iu.funcionalidad.VehiculoW import VehiculoW
 from src.estructura_datos.arbol_b.ArbolB import ArbolB
 from src.iu.funcionalidad.MensajeD import MensajeD
@@ -13,13 +14,20 @@ from src.utils.CargarDatos import CargarDatos
 from src.utils.Graficar import Graficar
 
 class MainW(QMainWindow):
-    def __init__(self, lista: ListaCircularDoble, arbolB: ArbolB):
+    def __init__(self, lista: ListaCircularDoble, arbolB: ArbolB, grafo: ListaAdyacencia):
         super(MainW, self).__init__()
         self.lista = lista
         self.arbolB = arbolB
+        self.grafo = grafo
         
         ruta_ui = Path(__file__).parent / 'main.ui'
         uic.loadUi(ruta_ui, self)
+        
+        self.menu_bar = self.findChild(QMenuBar, 'menubar')
+        self.menu_bar.hide()
+        
+        self.cargar_rutas_btn = self.findChild(QPushButton, 'pushButton_cargar_rutas')
+        self.cargar_rutas_btn.clicked.connect(self.cargar_rutas)
         
         self.action_crear_clt.triggered.connect(lambda: self.accion_cliente(1))
         self.action_modificar_clt.triggered.connect(lambda: self.accion_cliente(2))
@@ -33,9 +41,11 @@ class MainW(QMainWindow):
         self.action_info_vhcl.triggered.connect(lambda: self.accion_vehiculo(4))
         self.action_graficar_vhcl.triggered.connect(lambda: self.accion_vehiculo(5))
         
+        self.action_graficar_rts.triggered.connect(self.graficar_rutas)
+        
         self.action_cargar_clientes.triggered.connect(lambda: self.abrir_archivo(1))
         self.action_cargar_vehiculos.triggered.connect(lambda: self.abrir_archivo(2))
-        self.action_cargar_rutas.triggered.connect(lambda: self.abrir_archivo(3))
+        #self.action_cargar_rutas.triggered.connect(lambda: self.abrir_archivo(3))
         
         self.show()
     
@@ -50,7 +60,13 @@ class MainW(QMainWindow):
                 lc.cargar_vehiculos(filename[0], self.arbolB)
                 self.window = MensajeD('Exito', 'Vehiculos importados', 'Los vehiculos han sido \nimportados con éxito')
             elif opcion == 3:
-                lc.cargar_rutas(filename[0])
+                lc.cargar_rutas(filename[0], self.grafo)
+                self.window = MensajeD('Exito', 'Rutas importadas', 'Las rutas han sido \nimportadas con éxito')
+                
+    def cargar_rutas(self):
+        self.abrir_archivo(3)
+        self.menu_bar.show()
+        self.cargar_rutas_btn.hide()
 
     def accion_cliente(self, opcion:int = 0):
         
@@ -75,3 +91,11 @@ class MainW(QMainWindow):
         
         else:
             self.window = VehiculoW(self.arbolB, opcion)
+            
+    def graficar_rutas(self):
+        
+        if not self.grafo.esta_vacia():
+            graficar_aux = Graficar()
+            graficar_aux.graficar("graficas_edd/rutas.svg", self.grafo.graficar())    
+        
+        subprocess.run(["xdg-open", "graficas_edd/rutas.svg"])

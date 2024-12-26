@@ -1,28 +1,26 @@
-digraph G {
-bgcolor="#F5F5F5";
-fontcolor=black;
-label="Clientes";
-labelloc="t";
-nodesep=0.5;
-node [fontsize = 4.5 shape=box style=filled fillcolor="#004488" fontcolor="#F5F5F5" color=transparent];
-edge [fontcolor=white color="#ff5722"];
-
-n1[label="dpi = 1122334455667\nNombres = Carlos Eduardo\nApellidos = Morales Castillo\nGenero = Masculino\nTelefono = 55558910"];
-n2[label="dpi = 1234567890101\nNombres = Juan Carlos\nApellidos = Pérez López\nGenero = Masculino\nTelefono = 55551234"];
-n3[label="dpi = 2233445566778\nNombres = Ana Patricia\nApellidos = López Hernández\nGenero = Femenino\nTelefono = 55551122"];
-n4[label="dpi = 3344556677889\nNombres = Luis Alberto\nApellidos = García Ramírez\nGenero = Masculino\nTelefono = 55553344"];
-n5[label="dpi = 9876543210202\nNombres = María Fernanda\nApellidos = Rodríguez Gómez\nGenero = Femenino\nTelefono = 55555678"];
-
-n1->n2;
-n2->n3;
-n2->n1;
-n3->n4;
-n3->n2;
-n4->n5;
-n4->n3;
-n5->n4;
-n5->n1[tailport=n headport=n];
-n1->n5[tailport=s headport=s];
-
-{ rank=same; n1; n2; n3; n4; n5; }
+graph G {
+	layaout="neato";
+	graph [rankdir="RL"];
+	overlap="false";
+	splines="true";
+	n0[label="Guatemala City"];
+	n1[label="Antigua Guatemala"];
+	n2[label="Quetzaltenango"];
+	n3[label="Huehuetenango"];
+	n4[label="Escuintla"];
+	n5[label="Mazatenango"];
+	n6[label="Izabal"];
+	n0 -- n1[label="5400"];
+	n0 -- n6[label="5000"];
+	n0 -- n2[label="4000"];
+	n0 -- n4[label="6100"];
+	n1 -- n4[label="4500"];
+	n1 -- n2[label="4900"];
+	n2 -- n3[label="8100"];
+	n2 -- n5[label="5300"];
+	n3 -- n6[label="7200"];
+	n3 -- n4[label="6800"];
+	n4 -- n5[label="6300"];
+	n5 -- n6[label="4700"];
+	
 }

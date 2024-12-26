@@ -1,3 +1,4 @@
+from src.estructura_datos.grafo.ListaAdyacencia import ListaAdyacencia
 from src.estructura_datos.arbol_b.ArbolB import ArbolB
 from src.estructura_datos.lista_circular_doblemente_enlazada.ListaCircularDoble import ListaCircularDoble
 from src.modelo.Ruta import Ruta
@@ -14,8 +15,6 @@ class CargarDatos:
         clientes.pop(-1)
         cont: int = 0
 
-        #lista: ListaCircularDoble = ListaCircularDoble()
-
         for cliente_aux in clientes:
             cont += 1
             #print(f'\n------ Cliente #{cont} ------')
@@ -30,8 +29,6 @@ class CargarDatos:
             lista.insertar(cliente)
         
         archivo.close()
-
-        #print(lista.mostrar_estructura())
 
 
     def cargar_vehiculos(self, ruta: str, arbolB: ArbolB):
@@ -55,7 +52,7 @@ class CargarDatos:
 
         archivo.close()
 
-    def cargar_rutas(self, ruta_a: str):
+    def cargar_rutas(self, ruta_a: str, grafo: ListaAdyacencia):
         archivo = open(ruta_a, 'r')
         rutas = archivo.read().split('%')
         rutas.pop(-1)
@@ -63,7 +60,7 @@ class CargarDatos:
 
         for ruta_aux in rutas:
             cont += 1
-            print(f'\n------ Ruta #{cont} ------')
+            #print(f'\n------ Ruta #{cont} ------')
             dato = ruta_aux.split('/')
 
             if len(dato) != 3:
@@ -71,7 +68,8 @@ class CargarDatos:
                 continue
 
             ruta = Ruta(dato[0][:-1].replace("\n", ""), dato[1][1:-1], int(dato[2][1:-1]))
-            print(ruta)
+            #print(ruta)
+            grafo.insertar_ruta(ruta)
 
         archivo.close()
         
