@@ -111,14 +111,14 @@ class ListaCircularDoble:
             return 'Lista vacia'
 
         config: str = (
-                        'bgcolor=\"#F5F5F5\";\n'
-                        'fontcolor=black;\n'
-                        'label=\"Clientes\";\n'
-                        'labelloc=\"t\";\n'
-                        'nodesep=0.5;\n'
-                        'node [fontsize = 4.5 shape=box style=filled fillcolor=\"#004488\" '
-                        'fontcolor=\"#F5F5F5\" color=transparent];\n'
-                        'edge [fontcolor=white color=\"#ff5722\"];\n'
+                        'bgcolor="#F5F5F5";\n\t'
+                        'fontcolor=black;\n\t'
+                        'label="Clientes";\n\t'
+                        'labelloc="t";\n\t'
+                        'nodesep=0.5;\n\t'
+                        'node [fontsize = 4.5 shape=box style=filled fillcolor="#004488" '
+                        'fontcolor="#F5F5F5" color=transparent];\n\t'
+                        'edge [fontcolor=white color="#ff5722"];\n\t'
                     )
         defNodo: str = ''
         relNodo: str = ''

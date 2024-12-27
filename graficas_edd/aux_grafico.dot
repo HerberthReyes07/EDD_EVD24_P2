@@ -1,26 +1,16 @@
-graph G {
-	layaout="neato";
-	graph [rankdir="RL"];
-	overlap="false";
-	splines="true";
-	n0[label="Guatemala City"];
-	n1[label="Antigua Guatemala"];
-	n2[label="Quetzaltenango"];
-	n3[label="Huehuetenango"];
-	n4[label="Escuintla"];
-	n5[label="Mazatenango"];
-	n6[label="Izabal"];
-	n0 -- n1[label="5400"];
-	n0 -- n6[label="5000"];
-	n0 -- n2[label="4000"];
-	n0 -- n4[label="6100"];
-	n1 -- n4[label="4500"];
-	n1 -- n2[label="4900"];
-	n2 -- n3[label="8100"];
-	n2 -- n5[label="5300"];
-	n3 -- n6[label="7200"];
-	n3 -- n4[label="6800"];
-	n4 -- n5[label="6300"];
-	n5 -- n6[label="4700"];
+digraph G {
+	graph[rankdir="LR"]
+	bgcolor="#F5F5F5";
+	fontcolor=black;
+	label="Clientes";
+	labelloc="t";
+	nodesep=0.5;
+	node [fontsize = 4.5 shape=box style=filled fillcolor="#004488" fontcolor="#F5F5F5" color=transparent];
+	edge [fontcolor=white color="#ff5722"];
+	n1[label="Id: 1\nCliente: Carlos Eduardo Morales Castillo\nVehiculo: Hyundai Elantra\nFecha: 26/12/2024\nHora: 21:29"];
+	n2[label="Id: 2\nCliente: Juan Carlos Pérez López\nVehiculo: Nissan Altima\nFecha: 26/12/2024\nHora: 21:29"];
+	n3[label="Id: 3\nCliente: María Fernanda Rodríguez Gómez\nVehiculo: Mazda CX-5\nFecha: 26/12/2024\nHora: 21:30"];
+	n1 -> n2;
+	n2 -> n3;
 	
 }

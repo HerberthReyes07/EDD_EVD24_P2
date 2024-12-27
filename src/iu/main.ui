@@ -26,7 +26,10 @@
     <property name="font">
      <font>
       <family>Ubuntu</family>
-      <pointsize>30</pointsize>
+      <pointsize>28</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
@@ -36,7 +39,7 @@
    <widget class="QPushButton" name="pushButton_cargar_rutas">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>340</x>
       <y>180</y>
       <width>141</width>
       <height>32</height>
@@ -44,6 +47,29 @@
     </property>
     <property name="text">
      <string>Cargar rutas</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_reportes">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>230</y>
+      <width>321</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_ver_reporte">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>290</y>
+      <width>141</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ver reporte</string>
     </property>
    </widget>
   </widget>

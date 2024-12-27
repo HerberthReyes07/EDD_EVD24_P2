@@ -1,8 +1,10 @@
 import subprocess
-from PyQt5.QtWidgets import QMainWindow, QFileDialog, QMenuBar, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QFileDialog, QMenuBar, QPushButton, QComboBox
 from PyQt5 import uic
 from pathlib import Path
 
+from src.iu.funcionalidad.ViajeW import ViajeW
+from src.estructura_datos.lista_simple.ListaSimple import ListaSimple
 from src.estructura_datos.grafo.ListaAdyacencia import ListaAdyacencia
 from src.iu.funcionalidad.VehiculoW import VehiculoW
 from src.estructura_datos.arbol_b.ArbolB import ArbolB
@@ -14,17 +16,25 @@ from src.utils.CargarDatos import CargarDatos
 from src.utils.Graficar import Graficar
 
 class MainW(QMainWindow):
-    def __init__(self, lista: ListaCircularDoble, arbolB: ArbolB, grafo: ListaAdyacencia):
+    def __init__(self, clientes: ListaCircularDoble, vehiculos: ArbolB, rutas: ListaAdyacencia, viajes: ListaSimple):
         super(MainW, self).__init__()
-        self.lista = lista
-        self.arbolB = arbolB
-        self.grafo = grafo
+        self.clientes = clientes
+        self.vehiculos = vehiculos
+        self.rutas = rutas
+        self.viajes = viajes
         
         ruta_ui = Path(__file__).parent / 'main.ui'
         uic.loadUi(ruta_ui, self)
         
         self.menu_bar = self.findChild(QMenuBar, 'menubar')
+        self.reportes_cb = self.findChild(QComboBox, 'comboBox_reportes')
+        self.ver_reporte_btn = self.findChild(QPushButton, 'pushButton_ver_reporte')
+        
+        self.reportes_cb.addItems(['Seleccionar un reporte', 'Top viajes', 'Top ganancia', 'Top clientes', 'Top vehículos', 'Ruta de un viaje'])
+        
         self.menu_bar.hide()
+        self.reportes_cb.hide()
+        self.ver_reporte_btn.hide()
         
         self.cargar_rutas_btn = self.findChild(QPushButton, 'pushButton_cargar_rutas')
         self.cargar_rutas_btn.clicked.connect(self.cargar_rutas)
@@ -43,6 +53,9 @@ class MainW(QMainWindow):
         
         self.action_graficar_rts.triggered.connect(self.graficar_rutas)
         
+        self.action_crear_vj.triggered.connect(lambda: self.accion_viaje(1))
+        self.action_graficar_vj.triggered.connect(lambda: self.accion_viaje(2))
+        
         self.action_cargar_clientes.triggered.connect(lambda: self.abrir_archivo(1))
         self.action_cargar_vehiculos.triggered.connect(lambda: self.abrir_archivo(2))
         #self.action_cargar_rutas.triggered.connect(lambda: self.abrir_archivo(3))
@@ -54,48 +67,62 @@ class MainW(QMainWindow):
         if filename[0]:
             lc = CargarDatos()
             if opcion == 1:
-                lc.cargar_clientes(filename[0], self.lista)
+                lc.cargar_clientes(filename[0], self.clientes)
                 self.window = MensajeD('Exito', 'Clientes importados', 'Los clientes han sido \nimportados con éxito')
             elif opcion == 2:
-                lc.cargar_vehiculos(filename[0], self.arbolB)
+                lc.cargar_vehiculos(filename[0], self.vehiculos)
                 self.window = MensajeD('Exito', 'Vehiculos importados', 'Los vehiculos han sido \nimportados con éxito')
             elif opcion == 3:
-                lc.cargar_rutas(filename[0], self.grafo)
+                lc.cargar_rutas(filename[0], self.rutas)
                 self.window = MensajeD('Exito', 'Rutas importadas', 'Las rutas han sido \nimportadas con éxito')
                 
     def cargar_rutas(self):
         self.abrir_archivo(3)
         self.menu_bar.show()
+        self.reportes_cb.show()
+        self.ver_reporte_btn.show()
         self.cargar_rutas_btn.hide()
 
     def accion_cliente(self, opcion:int = 0):
         
         if opcion == 5:
-            if not self.lista.esta_vacia():
+            if not self.clientes.esta_vacia():
                 graficar_aux = Graficar()
-                graficar_aux.graficar("graficas_edd/clientes.svg", self.lista.graficar())    
+                graficar_aux.graficar("graficas_edd/clientes.svg", self.clientes.graficar())    
             
             subprocess.run(["xdg-open", "graficas_edd/clientes.svg"])
             #self.window = GraficoW("clientes.svg", "Reporte de Clientes")
         else:
-            self.window = ClienteW(self.lista, opcion)
+            self.window = ClienteW(self.clientes, opcion)
         
     def accion_vehiculo(self, opcion:int = 0):
         
         if opcion == 5:
-            if not self.arbolB.esta_vacio():
+            if not self.vehiculos.esta_vacio():
                 graficar_aux = Graficar()
-                graficar_aux.graficar("graficas_edd/vehiculos.svg", self.arbolB.graficar_arbol())    
+                graficar_aux.graficar("graficas_edd/vehiculos.svg", self.vehiculos.graficar_arbol())    
             
             subprocess.run(["xdg-open", "graficas_edd/vehiculos.svg"])
         
         else:
-            self.window = VehiculoW(self.arbolB, opcion)
+            self.window = VehiculoW(self.vehiculos, opcion)
+            
+    def accion_viaje(self, opcion:int = 0):
+        
+        if opcion == 2:
+            if not self.viajes.esta_vacia():
+                graficar_aux = Graficar()
+                graficar_aux.graficar("graficas_edd/viajes.svg", self.viajes.graficar_viajes())
+            
+            subprocess.run(["xdg-open", "graficas_edd/viajes.svg"])
+        else:
+            self.window = ViajeW(self.viajes, self.rutas, self.vehiculos, self.clientes)
+            
             
     def graficar_rutas(self):
         
-        if not self.grafo.esta_vacia():
+        if not self.rutas.esta_vacia():
             graficar_aux = Graficar()
-            graficar_aux.graficar("graficas_edd/rutas.svg", self.grafo.graficar())    
+            graficar_aux.graficar("graficas_edd/rutas.svg", self.rutas.graficar())    
         
         subprocess.run(["xdg-open", "graficas_edd/rutas.svg"])
