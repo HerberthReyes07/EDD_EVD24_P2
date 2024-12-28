@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QMainWindow, QFileDialog, QMenuBar, QPushButton, QCo
 from PyQt5 import uic
 from pathlib import Path
 
+from src.iu.funcionalidad.ReportesW import ReportesW
 from src.iu.funcionalidad.ViajeW import ViajeW
 from src.estructura_datos.lista_simple.ListaSimple import ListaSimple
 from src.estructura_datos.grafo.ListaAdyacencia import ListaAdyacencia
@@ -31,6 +32,7 @@ class MainW(QMainWindow):
         self.ver_reporte_btn = self.findChild(QPushButton, 'pushButton_ver_reporte')
         
         self.reportes_cb.addItems(['Seleccionar un reporte', 'Top viajes', 'Top ganancia', 'Top clientes', 'Top vehículos', 'Ruta de un viaje'])
+        self.ver_reporte_btn.clicked.connect(self.ver_reporte)
         
         self.menu_bar.hide()
         self.reportes_cb.hide()
@@ -54,7 +56,7 @@ class MainW(QMainWindow):
         self.action_graficar_rts.triggered.connect(self.graficar_rutas)
         
         self.action_crear_vj.triggered.connect(lambda: self.accion_viaje(1))
-        self.action_graficar_vj.triggered.connect(lambda: self.accion_viaje(2))
+        self.action_graficar_vj.triggered.connect(lambda: self.accion_viaje(3))
         
         self.action_cargar_clientes.triggered.connect(lambda: self.abrir_archivo(1))
         self.action_cargar_vehiculos.triggered.connect(lambda: self.abrir_archivo(2))
@@ -82,6 +84,18 @@ class MainW(QMainWindow):
         self.reportes_cb.show()
         self.ver_reporte_btn.show()
         self.cargar_rutas_btn.hide()
+        
+    def ver_reporte(self):
+        opcion = self.reportes_cb.currentIndex()
+        
+        if opcion == 0:
+            self.window = MensajeD('Error', 'Reporte no seleccionado', 'Por favor seleccione un reporte')
+            return
+        
+        if opcion == 5:
+            self.accion_viaje(2)
+        else:
+            self.window = ReportesW(self.viajes, opcion)
 
     def accion_cliente(self, opcion:int = 0):
         
@@ -109,16 +123,15 @@ class MainW(QMainWindow):
             
     def accion_viaje(self, opcion:int = 0):
         
-        if opcion == 2:
+        if opcion == 3:
             if not self.viajes.esta_vacia():
                 graficar_aux = Graficar()
                 graficar_aux.graficar("graficas_edd/viajes.svg", self.viajes.graficar_viajes())
             
             subprocess.run(["xdg-open", "graficas_edd/viajes.svg"])
         else:
-            self.window = ViajeW(self.viajes, self.rutas, self.vehiculos, self.clientes)
-            
-            
+            self.window = ViajeW(opcion, self.viajes, self.rutas, self.vehiculos, self.clientes)
+                    
     def graficar_rutas(self):
         
         if not self.rutas.esta_vacia():

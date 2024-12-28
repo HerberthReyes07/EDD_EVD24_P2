@@ -2,14 +2,14 @@ digraph G {
 	graph[rankdir="LR"]
 	bgcolor="#F5F5F5";
 	fontcolor=black;
-	label="Clientes";
+	label="Viajes";
 	labelloc="t";
 	nodesep=0.5;
 	node [fontsize = 4.5 shape=box style=filled fillcolor="#004488" fontcolor="#F5F5F5" color=transparent];
 	edge [fontcolor=white color="#ff5722"];
-	n1[label="Id: 1\nCliente: Carlos Eduardo Morales Castillo\nVehiculo: Hyundai Elantra\nFecha: 26/12/2024\nHora: 21:29"];
-	n2[label="Id: 2\nCliente: Juan Carlos Pérez López\nVehiculo: Nissan Altima\nFecha: 26/12/2024\nHora: 21:29"];
-	n3[label="Id: 3\nCliente: María Fernanda Rodríguez Gómez\nVehiculo: Mazda CX-5\nFecha: 26/12/2024\nHora: 21:30"];
+	n1[label="ID: 1\nCliente: Carlos Eduardo Morales Castillo\nVehiculo: Subaru Impreza\nFecha: 28/12/2024\nHora: 14:45"];
+	n2[label="ID: 2\nCliente: Juan Carlos Pérez López\nVehiculo: Ford Fiesta\nFecha: 28/12/2024\nHora: 14:46"];
+	n3[label="ID: 3\nCliente: Carlos Eduardo Morales Castillo\nVehiculo: Honda Accord\nFecha: 28/12/2024\nHora: 14:46"];
 	n1 -> n2;
 	n2 -> n3;
 	

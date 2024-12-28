@@ -39,6 +39,14 @@ class ListaSimple:
             valor.set_id(aux.get_valor().get_id() + 1)
             aux.set_siguiente(nuevo)
             
+    def buscar_viaje(self, id: int):
+        aux = self.__cabeza
+        while aux is not None:
+            if aux.get_valor().get_id() == id:
+                return aux.get_valor()
+            aux = aux.get_siguiente()
+        return None
+            
     def buscar_ciudad(self, valor: str):
         aux = self.__cabeza
         while aux is not None:
