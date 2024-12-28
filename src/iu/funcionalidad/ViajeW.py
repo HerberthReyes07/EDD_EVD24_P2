@@ -126,7 +126,7 @@ class ViajeW(QMainWindow):
             print('Vehiculo no encontrado')
             return
         
-        self.nombre_vehiculo_le.setText(self.vehiculo_seleccionado.get_marca() + ' ' + self.vehiculo_seleccionado.get_modelo())    
+        self.nombre_vehiculo_le.setText(self.vehiculo_seleccionado.get_marca() + ' ' + str(self.vehiculo_seleccionado.get_modelo()))    
     
     def llenar_cb_buscar(self):
         self.buscar_cb.clear()
@@ -180,7 +180,7 @@ class ViajeW(QMainWindow):
         self.cliente_cb.setCurrentText(self.viaje_buscado.get_cliente().get_dpi().__str__())
         self.nombre_cliente_le.setText(self.viaje_buscado.get_cliente().get_nombres() + ' ' + self.viaje_buscado.get_cliente().get_apellidos())
         self.vehiculo_cb.setCurrentText(self.viaje_buscado.get_vehiculo().get_placa())
-        self.nombre_vehiculo_le.setText(self.viaje_buscado.get_vehiculo().get_marca() + ' ' + self.viaje_buscado.get_vehiculo().get_modelo())
+        self.nombre_vehiculo_le.setText(self.viaje_buscado.get_vehiculo().get_marca() + ' ' + str(self.viaje_buscado.get_vehiculo().get_modelo()))
     
     def limpiar_campos(self):
         self.origen_cb.setCurrentIndex(0)

@@ -75,7 +75,11 @@ class VehiculoW(QMainWindow):
         try:
             float(self.precio_le.text())
         except:
-            self.window = MensajeD('Error', 'Datos no validos', 'El precio debe ser númerico (Q)')
+            self.window = MensajeD('Error', 'Datos no validos', 'El precio debe ser \nnúmerico (Q)')
+            return
+        
+        if self.modelo_le.text().isdigit() == False:
+            self.window = MensajeD('Error', 'Datos no validos', 'El modelo debe ser \nun número entero')
             return    
         
         if self.placa_le.text() == '' or self.marca_le.text() == '' or self.modelo_le.text() == '' or self.precio_le.text() == '':
@@ -83,7 +87,7 @@ class VehiculoW(QMainWindow):
             return
         
         if self.opcion == 1:
-            self.arbolB.insertar_vehiculo(Vehiculo(self.placa_le.text(), self.marca_le.text(), self.modelo_le.text(), float(self.precio_le.text())))
+            self.arbolB.insertar_vehiculo(Vehiculo(self.placa_le.text(), self.marca_le.text(), int(self.modelo_le.text()), float(self.precio_le.text())))
             self.limpiar_campos()
             self.window = MensajeD('Exito', 'Vehículo creado', 'El vehículo ha sido creado \ncon éxito')
         
@@ -100,7 +104,7 @@ class VehiculoW(QMainWindow):
     def mostrar_datos(self):
         self.placa_le.setText(self.vehiculo_buscado.get_placa())
         self.marca_le.setText(self.vehiculo_buscado.get_marca())
-        self.modelo_le.setText(self.vehiculo_buscado.get_modelo())
+        self.modelo_le.setText(str(self.vehiculo_buscado.get_modelo()))
         self.precio_le.setText(str(self.vehiculo_buscado.get_precio()))
     
     def llenar_combo_box(self):

@@ -1,5 +1,5 @@
 class Vehiculo:
-    def __init__(self, placa: str, marca: str, modelo: str, precio: float):
+    def __init__(self, placa: str, marca: str, modelo: int, precio: float):
         self.__placa = placa
         self.__marca = marca
         self.__modelo = modelo
@@ -12,7 +12,7 @@ class Vehiculo:
     def get_marca(self) -> str:
         return self.__marca
 
-    def get_modelo(self) -> str:
+    def get_modelo(self) -> int:
         return self.__modelo
 
     def get_precio(self) -> float:
@@ -25,7 +25,7 @@ class Vehiculo:
     def set_marca(self, marca: str):
         self.__marca = marca
 
-    def set_modelo(self, modelo: str):
+    def set_modelo(self, modelo: int):
         self.__modelo = modelo
 
     def set_precio(self, precio: float):

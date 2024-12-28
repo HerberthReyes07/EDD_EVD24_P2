@@ -9,7 +9,6 @@ from src.modelo.Cliente import Cliente
 class CargarDatos:
 
     def cargar_clientes(self, ruta: str, lista: ListaCircularDoble):
-
         archivo = open(ruta, 'r')
         clientes = archivo.read().split(';')
         clientes.pop(-1)
@@ -24,12 +23,11 @@ class CargarDatos:
                 print(f'Error en la estructura del cliente {cont}')
                 continue
 
-            cliente = Cliente(int(dato[0]), dato[1][1:], dato[2][1:], dato[3][1], int(dato[4][1:]), dato[5][1:])
+            cliente = Cliente(int(dato[0].strip('\n')), dato[1][1:], dato[2][1:], dato[3][1], int(dato[4][1:]), dato[5][1:])
             #print(cliente)
             lista.insertar(cliente)
         
         archivo.close()
-
 
     def cargar_vehiculos(self, ruta: str, arbolB: ArbolB):
         archivo = open(ruta, 'r')
@@ -46,7 +44,7 @@ class CargarDatos:
                 print(f'Error en la estructura del vehiculo {cont}')
                 continue
 
-            vehiculo = Vehiculo(dato[0][:-1].replace("\n", ""), dato[1][1:-1], dato[2][1:-1], float(dato[3][1:]))
+            vehiculo = Vehiculo(dato[0].strip('\n'), dato[1], int(dato[2]), float(dato[3]))
             #print(vehiculo)
             arbolB.insertar_vehiculo(vehiculo)
 
@@ -67,7 +65,7 @@ class CargarDatos:
                 print(f'Error en la estructura de la ruta {cont}')
                 continue
 
-            ruta = Ruta(dato[0][:-1].replace("\n", ""), dato[1][1:-1], int(dato[2][1:-1]))
+            ruta = Ruta(dato[0].strip('\n'), dato[1], int(dato[2]))
             #print(ruta)
             grafo.insertar_ruta(ruta)
 

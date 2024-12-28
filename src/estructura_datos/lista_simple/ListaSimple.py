@@ -81,7 +81,7 @@ class ListaSimple:
             def_nodo += 'n' + recorrer.get_valor().get_id().__str__() + '[label="'
             def_nodo += 'ID: ' + recorrer.get_valor().get_id().__str__() + '\\n'
             def_nodo += 'Cliente: ' + recorrer.get_valor().get_cliente().get_nombres() + ' ' + recorrer.get_valor().get_cliente().get_apellidos() + '\\n'
-            def_nodo += 'Vehiculo: ' + recorrer.get_valor().get_vehiculo().get_marca() + ' ' + recorrer.get_valor().get_vehiculo().get_modelo() + '\\n'
+            def_nodo += 'Vehiculo: ' + recorrer.get_valor().get_vehiculo().get_marca() + ' ' + recorrer.get_valor().get_vehiculo().get_modelo().__str__() + '\\n'
             def_nodo += 'Fecha: ' + recorrer.get_valor().get_fecha() + '\\n'
             def_nodo += 'Hora: ' + recorrer.get_valor().get_hora() + '"];\n\t'
             

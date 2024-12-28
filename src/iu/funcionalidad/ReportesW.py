@@ -97,6 +97,6 @@ class ReportesW(QMainWindow):
             vehiculo = vehiculos_ordenados[i]
             self.reporte_tbl.setItem(i, 0, QTableWidgetItem(vehiculo['vehiculo'].get_placa()))
             self.reporte_tbl.setItem(i, 1, QTableWidgetItem(vehiculo['vehiculo'].get_marca()))
-            self.reporte_tbl.setItem(i, 2, QTableWidgetItem(vehiculo['vehiculo'].get_modelo()))
+            self.reporte_tbl.setItem(i, 2, QTableWidgetItem(str(vehiculo['vehiculo'].get_modelo())))
             self.reporte_tbl.setItem(i, 3, QTableWidgetItem(str(vehiculo['vehiculo'].get_precio())))
             self.reporte_tbl.setItem(i, 4, QTableWidgetItem(str(vehiculo['no_viajes'])))  
