@@ -2,15 +2,13 @@ digraph G {
 	graph[rankdir="LR"]
 	bgcolor="#F5F5F5";
 	fontcolor=black;
-	label="Ruta en el viaje 2";
+	label="Viajes";
 	labelloc="t";
 	nodesep=0.5;
-	node [fontsize = 7.5 shape=box style=filled fillcolor="#004488" fontcolor="#F5F5F5" color=transparent];
-	edge [fontcolor=black color="#ff5722"];
-	n1[label="Lugar: Murcia\nTiempo: 0"];
-	n2[label="Lugar: Albacete\nTiempo: 0 + 150 = 150"];
-	n3[label="Lugar: Madrid\nTiempo: 150 + 251 = 401"];
-	n1-> n2;
-	n2-> n3;
+	node [fontsize = 4.5 shape=box style=filled fillcolor="#004488" fontcolor="#F5F5F5" color=transparent];
+	edge [fontcolor=white color="#ff5722"];
+	n1[label="ID: 1\nCliente: Sebastian Retana\nVehiculo: BMW 2003\nFecha: 30/12/2024\nHora: 02:09"];
+	n2[label="ID: 2\nCliente: Alejandro Arriola\nVehiculo: BMW 2000\nFecha: 30/12/2024\nHora: 02:09"];
+	n1 -> n2;
 	
 }
