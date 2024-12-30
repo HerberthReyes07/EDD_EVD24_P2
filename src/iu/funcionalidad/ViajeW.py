@@ -1,3 +1,4 @@
+import subprocess
 from datetime import datetime
 from PyQt5.QtWidgets import QMainWindow, QPushButton, QLineEdit, QComboBox
 from PyQt5 import uic
@@ -9,6 +10,7 @@ from src.estructura_datos.lista_simple.ListaSimple import ListaSimple
 from src.estructura_datos.arbol_b.ArbolB import ArbolB
 from src.estructura_datos.lista_circular_doblemente_enlazada.ListaCircularDoble import ListaCircularDoble
 from src.modelo.Viaje import Viaje
+from src.utils.Graficar import Graficar
 
 
 class ViajeW(QMainWindow):
@@ -75,14 +77,25 @@ class ViajeW(QMainWindow):
             
             viaje = Viaje(self.origen_cb.currentText(), self.destino_cb.currentText(), fecha, hora, self.cliente_seleccionado, self.vehiculo_seleccionado)
             #camino mas corto
+            viaje.set_ruta_tomada(self.rutas.obtener_ruta(self.origen_cb.currentText(), self.destino_cb.currentText()))
+            
             self.viajes.insertar_viaje(viaje)
             
-            self.window = MensajeD('Exito', 'Viaje iniciado', 'El viaje ha sido iniciado con éxito')
+            msj:str = (f'Cliente: {viaje.get_cliente().get_nombres()} {viaje.get_cliente().get_apellidos()}\n'
+                       f'Vehiculo: {viaje.get_vehiculo().get_marca()} {viaje.get_vehiculo().get_modelo()}\n'
+                       f'Fecha: {viaje.get_fecha()}\n'
+                       f'Hora: {viaje.get_hora()}')
+            
+            graficar_aux = Graficar()
+            graficar_aux.graficar(f"graficas_edd/ruta_viaje_{viaje.get_id()}.svg", viaje.graficar_ruta())    
+            subprocess.run(["xdg-open", f"graficas_edd/ruta_viaje_{viaje.get_id()}.svg"])
+            
+            self.window = MensajeD('Exito', f'Viaje {viaje.get_id()} iniciado', msj)
             self.limpiar_campos()
         
         else:
-            #graficar ruta del viaje
-            pass
+            #graficar_aux.graficar(f"graficas_edd/ruta_viaje_{self.viaje_buscado.get_id()}.svg", self.viaje_buscado.graficar_ruta())    
+            subprocess.run(["xdg-open", f"graficas_edd/ruta_viaje_{self.viaje_buscado.get_id()}.svg"])
         
     def buscar_viaje(self):
         
@@ -91,7 +104,7 @@ class ViajeW(QMainWindow):
             self.accion_btn.setDisabled(True)
             return
         
-        self.viaje_buscado = self.viajes.buscar_viaje(int(self.buscar_cb.currentText()))
+        self.viaje_buscado: Viaje = self.viajes.buscar_viaje(int(self.buscar_cb.currentText()))
         
         if self.viaje_buscado is None:
             print('Viaje no encontrado')

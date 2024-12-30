@@ -24,12 +24,14 @@ class ReportesW(QMainWindow):
         if opcion == 1:
             self.tipo_reporte_lbl.setText('Top Viajes')
             self.reporte_tbl.setColumnCount(8)
-            self.reporte_tbl.setHorizontalHeaderLabels(['ID', 'Origen', 'Destino', 'Cliente', 'Vehiculo' 'Fecha', 'Hora', 'Tiempo'])
-        
+            self.reporte_tbl.setHorizontalHeaderLabels(['ID', 'Origen', 'Destino', 'Cliente', 'Vehiculo', 'Fecha', 'Hora', 'No. Destinos'])
+            self.llenar_tabla_top_viajes()
+            
         elif opcion == 2:
             self.tipo_reporte_lbl.setText('Top Ganancia')
-            self.reporte_tbl.setColumnCount(8)
-            self.reporte_tbl.setHorizontalHeaderLabels(['ID', 'Origen', 'Destino', 'Cliente', 'Vehiculo' 'Fecha', 'Hora', 'Recaudado'])
+            self.reporte_tbl.setColumnCount(10)
+            self.reporte_tbl.setHorizontalHeaderLabels(['ID', 'Origen', 'Destino', 'Cliente', 'Vehiculo', 'Fecha', 'Hora', 'Precio (Q)', 'Tiempo', 'Recaudado (Q)'])
+            self.llenar_tabla_top_ganancia()
         
         elif opcion == 3:
             self.tipo_reporte_lbl.setText('Top Clientes')
@@ -40,10 +42,80 @@ class ReportesW(QMainWindow):
         elif opcion == 4:
             self.tipo_reporte_lbl.setText('Top Vehiculos')
             self.reporte_tbl.setColumnCount(5)
-            self.reporte_tbl.setHorizontalHeaderLabels(['Placa', 'Marca', 'Modelo', 'Precio', 'No. Viajes'])
+            self.reporte_tbl.setHorizontalHeaderLabels(['Placa', 'Marca', 'Modelo', 'Precio (Q)', 'No. Viajes'])
             self.llenar_tabla_top_vehiculos()
         
         self.show()
+        
+    def llenar_tabla_top_viajes(self):
+        
+        top_viajes: list[dict] = []
+        
+        recorrer_viajes = self.viajes.get_cabeza()
+        
+        while recorrer_viajes != None:
+            
+            viaje = recorrer_viajes.get_valor()
+            
+            top_viajes.append({
+                'viaje': viaje,
+                'no_destinos': viaje.obtener_tam_lista()
+            })    
+            recorrer_viajes = recorrer_viajes.get_siguiente()
+        
+        top_viajes.sort(key=lambda x: x['no_destinos'], reverse=True)
+        
+        for i in range(len(top_viajes)):
+            
+            if i == 5:
+                break
+            
+            viaje = top_viajes[i]['viaje']
+            self.reporte_tbl.setItem(i, 0, QTableWidgetItem(str(viaje.get_id())))
+            self.reporte_tbl.setItem(i, 1, QTableWidgetItem(viaje.get_origen()))
+            self.reporte_tbl.setItem(i, 2, QTableWidgetItem(viaje.get_destino()))
+            self.reporte_tbl.setItem(i, 3, QTableWidgetItem(str(viaje.get_cliente().get_dpi())))
+            self.reporte_tbl.setItem(i, 4, QTableWidgetItem(viaje.get_vehiculo().get_placa()))
+            self.reporte_tbl.setItem(i, 5, QTableWidgetItem(viaje.get_fecha()))
+            self.reporte_tbl.setItem(i, 6, QTableWidgetItem(viaje.get_hora()))
+            self.reporte_tbl.setItem(i, 7, QTableWidgetItem(str(viaje.obtener_tam_lista()))
+        )
+    
+    def llenar_tabla_top_ganancia(self):
+        
+        top_ganancia: list[dict] = []
+        
+        recorrer_viajes = self.viajes.get_cabeza()
+        
+        while recorrer_viajes != None:
+            
+            viaje = recorrer_viajes.get_valor()
+            
+            top_ganancia.append({
+                'viaje': viaje,
+                'ganancia': round(viaje.obtener_tiempo_total() * viaje.get_vehiculo().get_precio(), 2)
+            })    
+            recorrer_viajes = recorrer_viajes.get_siguiente()
+        
+        top_ganancia.sort(key=lambda x: x['ganancia'], reverse=True)
+        
+        for i in range(len(top_ganancia)):
+            
+            if i == 5:
+                break
+            
+            viaje = top_ganancia[i]['viaje']
+            self.reporte_tbl.setItem(i, 0, QTableWidgetItem(str(viaje.get_id())))
+            self.reporte_tbl.setItem(i, 1, QTableWidgetItem(viaje.get_origen()))
+            self.reporte_tbl.setItem(i, 2, QTableWidgetItem(viaje.get_destino()))
+            self.reporte_tbl.setItem(i, 3, QTableWidgetItem(str(viaje.get_cliente().get_dpi())))
+            self.reporte_tbl.setItem(i, 4, QTableWidgetItem(viaje.get_vehiculo().get_placa()))
+            self.reporte_tbl.setItem(i, 5, QTableWidgetItem(viaje.get_fecha()))
+            self.reporte_tbl.setItem(i, 6, QTableWidgetItem(viaje.get_hora()))
+            self.reporte_tbl.setItem(i, 7, QTableWidgetItem(str(viaje.get_vehiculo().get_precio())))
+            self.reporte_tbl.setItem(i, 8, QTableWidgetItem(str(viaje.obtener_tiempo_total())))
+            self.reporte_tbl.setItem(i, 9, QTableWidgetItem(str(top_ganancia[i]['ganancia'])))
+ 
         
     def llenar_tabla_top_clientes(self):
         

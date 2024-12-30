@@ -25,6 +25,15 @@ class ListaSimple:
                 aux = aux.get_siguiente()
             aux.set_siguiente(nuevo)
             
+    def insertar_frente(self, valor):
+        nuevo = NodoLS(valor)
+        
+        if self.__cabeza is None:
+            self.__cabeza = nuevo
+        else:
+            nuevo.set_siguiente(self.__cabeza)
+            self.__cabeza = nuevo
+            
     def insertar_viaje(self, valor):
         nuevo = NodoLS(valor)
         

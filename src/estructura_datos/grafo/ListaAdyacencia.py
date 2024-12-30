@@ -1,6 +1,9 @@
+from src.estructura_datos.lista_simple.NodoLS import NodoLS
+from src.estructura_datos.cola.Cola import Cola
 from src.estructura_datos.grafo.Vertice import Vertice
 from src.modelo.Ruta import Ruta
 from src.estructura_datos.lista_simple.ListaSimple import ListaSimple
+from copy import copy
 
 
 class ListaAdyacencia:
@@ -27,10 +30,66 @@ class ListaAdyacencia:
         """ if vertice_destino is None:
             vertice_destino = Vertice(destino)
             self.__vertices.insertar(vertice_destino) """
-            
-        vertice_origen.get_vecinos().insertar(Vertice(ruta.get_destino(), ruta.get_tiempo()))
+        
+        vecino = Vertice(ruta.get_destino(), ruta.get_tiempo())
+        vecino.set_peso_acumulado(ruta.get_tiempo())    
+        vertice_origen.get_vecinos().insertar(vecino)
         #vertice_destino.get_vecinos().insertar(Vertice(origen, ruta.get_tiempo()))
         
+    def obtener_ruta(self, origen: str, destino: str) -> ListaSimple:
+        ruta: ListaSimple[Vertice] = ListaSimple()
+        nodos_visitados: Cola[Vertice] = Cola()
+        nodos: Cola[Vertice] = Cola()
+    
+        origen:Vertice = copy(self.__vertices.buscar_ciudad(origen))
+        
+        if origen is None:
+            print('No se encontro el origen')
+            return None
+        
+        nodos.encolar(origen)
+        
+        resultado: Vertice = self.obtener_ruta_corta(destino, nodos_visitados, nodos)
+        
+        while resultado is not None:
+            ruta.insertar_frente(resultado)
+            resultado = resultado.get_padre()
+            
+        return ruta
+        
+    def obtener_ruta_corta(self, destino: str, nodo_visitados: Cola, nodos:Cola) -> Vertice:
+        
+        origen: Vertice = nodos.desencolar().get_valor()
+        
+        if origen.get_ciudad() == destino:
+            nodo_visitados.encolar(origen)
+            return origen
+        
+        aux: NodoLS[Vertice] = origen.get_vecinos().get_cabeza()
+        
+        while aux is not None:
+            
+            if not self.esta_visitado(aux.get_valor(), nodo_visitados):
+                peso: int = aux.get_valor().get_peso()
+                vecino: Vertice = copy(self.__vertices.buscar_ciudad(aux.get_valor().get_ciudad()))
+                vecino.set_peso(peso)
+                vecino.set_peso_acumulado(origen.get_peso_acumulado() + peso)
+                vecino.set_padre(origen)
+                
+                nodos.encolar(vecino)
+        
+            aux = aux.get_siguiente()
+            
+        nodos.ordenar()
+        nodo_visitados.encolar(origen)
+        
+        return self.obtener_ruta_corta(destino, nodo_visitados, nodos)
+    
+    def esta_visitado(self, vertice: Vertice, nodos_visitados: Cola) -> bool:
+        
+        result = nodos_visitados.buscar(vertice.get_ciudad())
+        return result is not None
+    
     def esta_vacia(self) -> bool:
         return self.__vertices.esta_vacia()
         

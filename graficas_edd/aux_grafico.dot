@@ -1,53 +1,16 @@
-graph G {
-	layout="neato";
-	overlap="false";
-	splines="true";
+digraph G {
+	graph[rankdir="LR"]
 	bgcolor="#F5F5F5";
 	fontcolor=black;
-	label="Rutas";
+	label="Ruta en el viaje 2";
 	labelloc="t";
-	fontsize=25;
-	node [style=filled fillcolor="#004488" fontcolor="#F5F5F5" color=transparent];
+	nodesep=0.5;
+	node [fontsize = 7.5 shape=box style=filled fillcolor="#004488" fontcolor="#F5F5F5" color=transparent];
 	edge [fontcolor=black color="#ff5722"];
-	n0[label="Cadiz"];
-	n1[label="Sevilla"];
-	n2[label="Granada"];
-	n3[label="Jaen"];
-	n4[label="Murcia"];
-	n5[label="Madrid"];
-	n6[label="Valencia"];
-	n7[label="Albacete"];
-	n8[label="Barcelona"];
-	n9[label="Gerona"];
-	n10[label="Zaragoza"];
-	n11[label="Badajoz"];
-	n12[label="Valladolid"];
-	n13[label="Vigo"];
-	n14[label="Coruna"];
-	n15[label="Bilbao"];
-	n16[label="Oviedo"];
-	n0 -- n1[label="125", len="2"];
-	n1 -- n2[label="256", len="2"];
-	n1 -- n3[label="242", len="2"];
-	n2 -- n3[label="99", len="2"];
-	n2 -- n4[label="278", len="2"];
-	n3 -- n5[label="335", len="2"];
-	n4 -- n6[label="241", len="2"];
-	n4 -- n7[label="150", len="2"];
-	n5 -- n7[label="251", len="2"];
-	n5 -- n10[label="325", len="2"];
-	n5 -- n11[label="403", len="2"];
-	n5 -- n12[label="193", len="2"];
-	n5 -- n15[label="395", len="2"];
-	n6 -- n7[label="191", len="2"];
-	n6 -- n8[label="349", len="2"];
-	n8 -- n9[label="100", len="2"];
-	n8 -- n10[label="296", len="2"];
-	n10 -- n15[label="324", len="2"];
-	n12 -- n13[label="356", len="2"];
-	n12 -- n14[label="455", len="2"];
-	n12 -- n15[label="280", len="2"];
-	n13 -- n14[label="171", len="2"];
-	n15 -- n16[label="304", len="2"];
+	n1[label="Lugar: Murcia\nTiempo: 0"];
+	n2[label="Lugar: Albacete\nTiempo: 0 + 150 = 150"];
+	n3[label="Lugar: Madrid\nTiempo: 150 + 251 = 401"];
+	n1-> n2;
+	n2-> n3;
 	
 }
